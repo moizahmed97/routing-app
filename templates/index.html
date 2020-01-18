@@ -1,3 +1,5 @@
+
+
 {% extends "base.html" %}
 
 {% block title %} Home {% endblock %}
@@ -34,11 +36,11 @@
             </thead>
             <tbody> 
                {% for route in data %}
-              <tr>
+              <tr id="test">
                 <th scope="row">{{route["id"]}}</th>
                 <td>{{route["From"]}}</td>
                 <td>{{route["To"]}}</td>
-                <td><button type="button" class="btn btn-outline-primary">Navigate</button></td>
+                <td><button type="button" id="{{route['id']}}" class="btn btn-outline-primary">Navigate</button></td>
               </tr>
             {% endfor %}
             </tbody>
@@ -47,8 +49,15 @@
     
     </div>
 
-</div>
+</div>    
 
-    
-    
+<script type="text/javascript">
+
+$("button").click(function() {
+    alert(this.id); // or alert($(this).attr('id'));
+});
+
+
+</script>
 {% endblock %}
+
