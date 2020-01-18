@@ -34,9 +34,13 @@ def home():
     allCoordinates = coordinates.find()  # get all the coordinates as objects from the Database
     return render_template("index.html", data=allCoordinates)
 
-@app.route("/display")
+@app.route("/display", methods=['GET', 'POST'])
 def display():
-    return render_template("display.html")
+    if request.method == 'GET':
+        return render_template("display.html")
+    else:
+        id = request.get_data()
+        return render_template("display.html", disp=id)
 
 @app.route("/about")
 def about():

@@ -13,7 +13,7 @@
         </div>
 
         <div class="col-sm">
-            <h4 class="text-center">Click to get the route and the Weather in the Area</h4>
+            <h4 class="text-center">Click to get the route</h4>
         </div>
 
         <div class="col-sm">
@@ -40,7 +40,7 @@
                 <th scope="row">{{route["id"]}}</th>
                 <td>{{route["From"]}}</td>
                 <td>{{route["To"]}}</td>
-                <td><button type="button" id="{{route['id']}}" class="btn btn-outline-primary">Navigate</button></td>
+                <td><button type="button" id="{{route['id']}}" class="btn btn-outline-primary goToRoute">Navigate</button></td>
               </tr>
             {% endfor %}
             </tbody>
@@ -53,8 +53,16 @@
 
 <script type="text/javascript">
 
-$("button").click(function() {
-    alert(this.id); // or alert($(this).attr('id'));
+$(".goToRoute").click(function() {
+    id = this.id
+    $.ajax({
+					url: '../display',
+					data: id,
+          method: 'POST',
+          success: function() {
+            console.log("success");
+          }
+				});
 });
 
 
