@@ -5,7 +5,7 @@ db = client.routes # create new database called routes
 
 coordinates = db.coordinates # create new collection (table) called coordinates 
 
-firstCoordinate = {
+firstCoordinate = {             # Sample Data 
     "id" : 1,
     "From" : "Big Ben Tower",
     "To" : "Millenium Dome",
@@ -22,16 +22,16 @@ secondCoordinate = {
     "Description" : "Coordinates for the Great Pyramid of Giza (Khufu) and the The Red Pyramid of Dahshur",
 }
 
+# Insert the sample data (Only for the first time)
 # coordinates.insert_many([firstCoordinate, secondCoordinate]) # Insert document (row) into collection (table) people
 
 app = Flask(__name__)
-# requires for session management
+# required for session management
 app.secret_key = "skdlfj235647fhf"
 
 @app.route("/")
 def home():
-    allCoordinates = coordinates.find()
-    #return f'<h1>Description : { test["Description"] } </h1>'
+    allCoordinates = coordinates.find()  # get all the coordinates as objects from the Database
     return render_template("index.html", data=allCoordinates)
 
 @app.route("/display")
