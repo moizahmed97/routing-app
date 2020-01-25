@@ -29,18 +29,24 @@ app = Flask(__name__)
 # required for session management
 app.secret_key = "skdlfj235647fhf"
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home():
-    allCoordinates = coordinates.find()  # get all the coordinates as objects from the Database
-    return render_template("index.html", data=allCoordinates)
+    if request.method == 'GET':
+        allCoordinates = coordinates.find()  # get all the coordinates as objects from the Database
+        return render_template("index.html", data=allCoordinates)
+    else:
+        test=request.get_json()
+        print(test)
+        return f"sfsdf"
+
 
 @app.route("/display", methods=['GET', 'POST'])
 def display():
     if request.method == 'GET':
         return render_template("display.html")
     else:
-        id = request.get_data()
-        return render_template("display.html", disp=id)
+        test=request.get_json()
+        print(test)
 
 @app.route("/about")
 def about():

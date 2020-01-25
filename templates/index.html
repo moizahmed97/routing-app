@@ -13,7 +13,10 @@
         </div>
 
         <div class="col-sm">
-            <h4 class="text-center">Click to get the route</h4>
+            <h4 class="text-center">Click to get the route                {% for t in test %}
+                {{t["id"]}}
+                {% endfor %}
+            </h4>
         </div>
 
         <div class="col-sm">
@@ -48,17 +51,18 @@
         </table>
     
     </div>
-
 </div>    
 
 <script type="text/javascript">
 
 $(".goToRoute").click(function() {
     id = this.id
+    console.log(id)
     $.ajax({
-					url: '../display',
-					data: id,
+          url: "http://127.0.0.1:5000/",
+          data: JSON.stringify({"id": id}),
           method: 'POST',
+          contentType: "application/json",
           success: function() {
             console.log("success");
           }
