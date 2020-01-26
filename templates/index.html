@@ -62,11 +62,10 @@ $(".goToRoute").click(function() {
           url: "http://127.0.0.1:5000/",
           data: JSON.stringify({"id": id}),
           method: 'POST',
-          contentType: "application/json",
-          success: function() {
-            console.log("success");
-          }
-				});
+          contentType: "application/json"
+				}).done (function(data){
+          console.log(data)
+        });
 });
 
 

@@ -1,4 +1,4 @@
-from flask import Flask,url_for, render_template, request,redirect,session
+from flask import Flask,url_for, render_template, request,redirect,session,jsonify
 from connect import client
 
 db = client.routes # create new database called routes
@@ -37,17 +37,18 @@ def home():
     else:
         test=request.get_json()
         print(test)
-        return f"sfsdf"
+        return jsonify(test)
+
+@app.after_request
+def add_headers(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    return response
 
 
 @app.route("/display", methods=['GET', 'POST'])
 def display():
-    if request.method == 'GET':
-        return render_template("display.html")
-    else:
-        test=request.get_json()
-        print(test)
-
+    return render_template("display.html")
 @app.route("/about")
 def about():
     return render_template("about.html")
