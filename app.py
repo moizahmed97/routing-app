@@ -3,6 +3,7 @@ from connect import client
 from sampledata import firstCoordinate,secondCoordinate
 from bson.json_util import dumps
 import json
+from connect import API_KEY
 
 
 db = client.routes # Database is called routes
@@ -19,7 +20,7 @@ def home():
     if request.method == 'GET':
         allCoordinates = dumps(coordinates.find())  # get all the coordinates as objects from the Database
         allCoordinates = json.loads(allCoordinates)
-        return render_template("index.html", data = allCoordinates)
+        return render_template("index.html", data = allCoordinates, API_KEY=API_KEY)
 
 
 @app.route("/about")

@@ -8,6 +8,7 @@ load_dotenv(dotenv_path=env_path)
 
 USERNAME = os.getenv("USERNAME")
 PASSWORD = os.getenv("PASSWORD")
+API_KEY = os.getenv("API_KEY")
 
 import urllib.parse
 
