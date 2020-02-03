@@ -14,4 +14,8 @@ import urllib.parse
 username = urllib.parse.quote_plus(USERNAME)
 password = urllib.parse.quote_plus(PASSWORD)
 
-client = MongoClient('mongodb+srv://%s:%s@routingapp-ifsle.mongodb.net/test?retryWrites=true&w=majority' % (username, password))
+try:
+    client = MongoClient('mongodb+srv://%s:%s@routingapp-ifsle.mongodb.net/test?retryWrites=true&w=majority'
+     % (username, password))
+except pymongo.errors.ServerSelectionTimeoutError:
+    print ("Could not connect to server")    

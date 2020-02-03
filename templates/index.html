@@ -13,10 +13,7 @@
         </div>
 
         <div class="col-sm">
-            <h4 class="text-center">Click to get the route                {% for t in test %}
-                {{t["id"]}}
-                {% endfor %}
-            </h4>
+            <h4 class="text-center">Click to get the route</h4>
         </div>
 
         <div class="col-sm">
@@ -43,7 +40,7 @@
                 <th scope="row">{{route["id"]}}</th>
                 <td>{{route["From"]}}</td>
                 <td>{{route["To"]}}</td>
-                <td><button type="button" id="{{route['id']}}" class="btn btn-outline-primary goToRoute">Navigate</button></td>
+                <td><button formaction = "{{url_for('home')}}" method="post"  type="button" id="{{route['id']}}"  name = "check" class="btn btn-outline-primary goToRoute">Navigate</button></td>
               </tr>
             {% endfor %}
             </tbody>
@@ -54,20 +51,18 @@
 </div>    
 
 <script type="text/javascript">
-
+/*
 $(".goToRoute").click(function() {
     id = this.id
-    console.log(id)
+    console.log("Button Clicked");
     $.ajax({
-          url: "http://127.0.0.1:5000/",
+          url: "/",
           data: JSON.stringify({"id": id}),
           method: 'POST',
-          contentType: "application/json"
-				}).done (function(data){
-          console.log(data)
-        });
+          contentType: "application/json",
+				});
 });
-
+*/
 
 </script>
 {% endblock %}
