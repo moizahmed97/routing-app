@@ -14,3 +14,7 @@ secondCoordinate = {
     "toCoordinates" : "29.808333, 31.205833",
     "Description" : "Coordinates for the Great Pyramid of Giza (Khufu) and the The Red Pyramid of Dahshur",
 }
+
+
+# Insert the sample data (Only for the first time, get it from the sampledata file)
+# coordinates.insert_many([firstCoordinate, secondCoordinate]) # Insert document (row) into collection (table) people
