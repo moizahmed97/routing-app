@@ -60,10 +60,11 @@
     </div>
 </div> 
 
+<br>
 
+<br>
 
-
-<div  class="container" id="mapContainer"></div>
+<div class="container" id="mapContainer"></div>
 
 
 
@@ -84,7 +85,17 @@ $(".goToRoute").click(function() {
             // Recieve the from and to Coordinates
 
             // Then call the loadmap function with those cooridnates   
+            fromCoordinates = 'geo!' + data["fromCoordinates"];
+            toCoordinates = 'geo!' + data["toCoordinates"]
+            console.log(fromCoordinates);
+            console.log(toCoordinates);
+            fromCoordinates = fromCoordinates.replace(/\s/g, '')
+            toCoordinates = toCoordinates.replace(/\s/g, '')
+            console.log(fromCoordinates);
+            console.log(toCoordinates);
             
+            loadMap(fromCoordinates, toCoordinates)
+            $('#mapContainer').fadeIn()
           }
 				});
 });
@@ -93,7 +104,7 @@ $(".goToRoute").click(function() {
 
 
 // To ensure the map is only loaded when the DOM is completely loaded
-function loadMap() {
+function loadMap(fromCoordinates, toCoordinates) {
 
 var key = '{{API_KEY}}'
 // Instantiate a map and platform object:
@@ -111,20 +122,24 @@ var map = new H.Map(
   document.getElementById('mapContainer'),
   defaultLayers.vector.normal.map,
   {
-    zoom: 10,
+    zoom: 13,
     center: { lat: 52.51, lng: 13.4 }
   });
 
+  window.addEventListener('resize', () => map.getViewPort().resize());
 
+  var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+  var ui = H.ui.UI.createDefault(map, defaultLayers);
 // Create the parameters for the routing request:
 var routingParameters = {
   
   // The routing mode:
   'mode': 'fastest;car',
   // The start point of the route:
-  'waypoint0': 'geo!50.1120423728813,8.68340740740811',
+  'waypoint0': fromCoordinates,
   // The end point of the route:
-  'waypoint1': 'geo!52.5309916298853,13.3846220493377',
+  'waypoint1': toCoordinates,
   // To retrieve the shape of the route we choose the route
   // representation mode 'display'
   'representation': 'display'
@@ -196,7 +211,6 @@ router.calculateRoute(routingParameters, onResult,
 }
 
   document.addEventListener('DOMContentLoaded', function() {
-  loadMap();
   });
 
 

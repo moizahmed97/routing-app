@@ -22,12 +22,16 @@ def home():
     elif request.method == 'POST':
         # get the ID 
         coordinateClickedID = request.get_json()
-
-        # Get the coordinates for the ID clicked 
-        
-        
-        # send it back in JSON Format  
-        return test
+        # the JSON object has id in string so convert it to Integer
+        intID = int(coordinateClickedID["id"])
+        # Get the coordinates for the ID clicked using a query to MongoDB
+        query = db.coordinates.find_one({'id': intID })
+        # send it back in JSON Format 
+        dict = {
+            "fromCoordinates" : query["fromCoordinates"],
+            "toCoordinates" : query["toCoordinates"]
+             } 
+        return jsonify(dict)
 
 
 @app.route("/about")
