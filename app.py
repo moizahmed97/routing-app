@@ -13,11 +13,13 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
+    
     # when the user has not selected which route they need
     if request.method == 'GET':
         allCoordinates = dumps(coordinates.find())  # get all the coordinates as objects from the Database
         allCoordinates = json.loads(allCoordinates)
         return render_template("index.html", data = allCoordinates, API_KEY=API_KEY)
+    
     # When the user has clicked on one of the routes to display it    
     elif request.method == 'POST':
         # get the ID 
