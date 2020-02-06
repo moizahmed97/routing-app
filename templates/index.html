@@ -50,7 +50,11 @@
                 <th scope="row">{{route["id"]}}</th>
                 <td>{{route["From"]}}</td>
                 <td>{{route["To"]}}</td>
-                <td><button  type="button" id="{{route['id']}}"  name = "check" class="btn btn-outline-primary goToRoute">Display Route</button></td>
+                <td><button  type="button" id="{{route['id']}}"  name = "check" class="btn btn-outline-primary goToRoute"
+                  data-toggle="modal" data-target=".bd-example-modal-lg">
+                  Display Route
+                </button>
+              </td>
               </tr>
             {% endfor %}
             </tbody>
@@ -60,21 +64,38 @@
     </div>
 </div> 
 
-<br>
+
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div  style="height: 90%; width: 100%;"  class="modal-dialog modal-lg" id="mapContainer">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
 
 <br>
 
-<div class="container" id="mapContainer" style="height:90%;"> </div>
+<br>
+
 
 
 
 
 <script type="text/javascript">
 
+$(document).ready(function() {
+
+  window.clicks = 0
+
+});
+
 
 $(".goToRoute").click(function() {
     id = this.id
-    console.log("Button Clicked");
+    window.clicks = window.clicks+1;
+    console.log(clicks);
     
     $.ajax({
           url: "/",
@@ -95,8 +116,16 @@ $(".goToRoute").click(function() {
             
             console.log(fromCoordinates);
             console.log(toCoordinates);
-          
+            
+            if (window.clicks == 1) { // Map being created the first time 
             loadMap(fromCoordinates, toCoordinates)
+            var flag = true;
+            }
+            else { // Map is being created the second time
+                // Remove the content from the div
+                $("#mapContainer").empty(); 
+                loadMap(fromCoordinates, toCoordinates)
+            }
             window.addEventListener('resize', function () {
             map.getViewPort().resize(); 
             });
