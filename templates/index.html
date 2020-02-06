@@ -64,7 +64,7 @@
 
 <br>
 
-<div class="container" id="mapContainer"></div>
+<div class="container" id="mapContainer" style="height:90%;"> </div>
 
 
 
@@ -95,8 +95,12 @@ $(".goToRoute").click(function() {
             
             console.log(fromCoordinates);
             console.log(toCoordinates);
-            
+          
             loadMap(fromCoordinates, toCoordinates)
+            window.addEventListener('resize', function () {
+            map.getViewPort().resize(); 
+            });
+
           }
 				});
 });
