@@ -1,8 +1,6 @@
 # routing-app
 Flask Web App connected to Atlas Mongo Database that calculates the directions from one point to another using the HERE Maps Routing API 
 
-The App has been deployed on Microsoft Azure App Services [Link](https://routingappflask.azurewebsites.net/).
-
 # Important Note on Implementing
 To communicate with Atlas the mongoDB database and the HERE routing API we need to store the environment variables in a env file which has been ignored here 
 So create a .env file in the main directory with the following fields:
